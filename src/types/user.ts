@@ -3,7 +3,7 @@ id:string;
 displetName:string;
 email:string;
 token:string;
-imageUrl:string;
+imageUrl?:string;
 }
 
 export type LoginCreds = {

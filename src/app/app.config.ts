@@ -12,17 +12,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes,withViewTransitions()),
      provideHttpClient(withInterceptors([errorInterceptor])),provideAppInitializer(async() => {
     const initService = inject(InitService);
-    return new Promise<void>((resolve) => {
-      setTimeout(async () => {
-         try {
-      return lastValueFrom(initService.init());
+    await new Promise<void>((resolve) => setTimeout(() => resolve(), 500));
+    try {
+      await lastValueFrom(initService.init());
     } finally {
-      const splash = document.getElementById('initial-splash');
-      if (splash) {
-        splash.remove();
-      }
-      resolve();
+      document.getElementById('initial-splash')?.remove();
     }
-    }, 500);
-  })} )],
+  }) ],
 };
